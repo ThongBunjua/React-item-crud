@@ -1,32 +1,44 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { UserProvider } from "./contexts/UserProvider"; 
+import RequireAuth from "./middleware/RequireAuth";     
+
 import ItemList from "./components/ItemList";
 import ItemEdit from "./components/ItemEdit";
-import UserList from "./components/UserList"; 
-import UserEdit from "./components/UserEdit"; 
+import UserList from "./components/UserList";
+import UserEdit from "./components/UserEdit";
+
+import Login from "./components/Login";
+import Profile from "./components/Profile";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-        
-        <nav style={{ marginBottom: '20px', paddingBottom: '10px', borderBottom: '1px solid #ccc' }}>
-          <Link to="/" style={{ marginRight: '20px', textDecoration: 'none', fontWeight: 'bold', color: '#333' }}>
-            Item Management
-          </Link>
-          <Link to="/users" style={{ textDecoration: 'none', fontWeight: 'bold', color: '#333' }}>
-            User Management
-          </Link>
-        </nav>
+    <UserProvider>
+      <BrowserRouter>
+        <div style={{ padding: '20px' }}>
+          <nav style={{ marginBottom: "20px", borderBottom: "1px solid #ccc", paddingBottom: "10px" }}>
+            <Link to="/login" style={{ marginRight: "10px" }}>Login</Link>
+            <Link to="/profile" style={{ marginRight: "10px" }}>My Profile</Link>
+            <Link to="/users" style={{ marginRight: "10px" }}>User List</Link>
+            <Link to="/" style={{ marginRight: "10px" }}>Item List</Link>
+          </nav>
 
-        <Routes>
-          <Route path="/" element={<ItemList />} />
-          <Route path="/item/:id" element={<ItemEdit />} />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            
+            <Route path="/profile" element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            } />
 
-          <Route path="/users" element={<UserList />} />
-          <Route path="/user/:id" element={<UserEdit />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+            <Route path="/users" element={<UserList />} />
+            <Route path="/user/:id" element={<UserEdit />} />
+            <Route path="/" element={<ItemList />} />
+            <Route path="/item/:id" element={<ItemEdit />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
