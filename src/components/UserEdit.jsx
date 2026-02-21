@@ -13,7 +13,7 @@ export default function UserEdit() {
   const passwordRef = useRef();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/user/${id}`)
+    fetch(`/api/user/${id}`)
       .then(res => res.json())
       .then(data => {
         usernameRef.current.value = data.username;
@@ -34,7 +34,7 @@ export default function UserEdit() {
       password: passwordRef.current.value
     };
 
-    const res = await fetch(`http://localhost:3000/api/user/${id}`, {
+    const res = await fetch(`/api/user/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)

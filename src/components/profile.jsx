@@ -8,7 +8,7 @@ export default function Profile() {
   const [hasImage, setHasImage] = useState(false);
   const fileInputRef = useRef(null);
   
-  const API_URL = "http://localhost:3000";
+  const API_URL = "";
 
   async function onUpdateImage() {
     const file = fileInputRef.current?.files[0];

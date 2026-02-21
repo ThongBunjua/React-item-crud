@@ -4,7 +4,7 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState({ isLoggedIn: false });
-  const API_URL = "http://localhost:3000"; 
+  const API_URL = ""; 
 
   useEffect(() => {
     const storedUser = localStorage.getItem("session");

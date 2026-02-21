@@ -12,7 +12,7 @@ export default function UserList() {
 
   const loadUsers = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/user");
+      const res = await fetch("/api/user");
       const data = await res.json();
       setUsers(Array.isArray(data) ? data : []);
     } catch (err) { console.error(err); }
@@ -29,7 +29,7 @@ export default function UserList() {
       lastname: lastnameRef.current.value
     };
 
-    const res = await fetch("http://localhost:3000/api/user", {
+    const res = await fetch("/api/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
@@ -51,7 +51,7 @@ export default function UserList() {
 
   const handleDelete = async (id) => {
     if(!confirm("Are you sure you want to delete this user?")) return;
-    await fetch(`http://localhost:3000/api/user/${id}`, { method: "DELETE" });
+    await fetch(`/api/user/${id}`, { method: "DELETE" });
     loadUsers();
   };
 

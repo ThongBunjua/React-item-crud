@@ -12,7 +12,7 @@ export default function ItemEdit() {
 
   useEffect(() => {
     const loadItem = async () => {
-      const res = await fetch(`http://localhost:3000/api/item/${id}`);
+      const res = await fetch(`/api/item/${id}`);
       const data = await res.json();
       if (nameRef.current) nameRef.current.value = data.itemName;
       if (categoryRef.current) categoryRef.current.value = data.itemCategory;
@@ -30,7 +30,7 @@ export default function ItemEdit() {
       status: statusRef.current.value
     };
 
-    await fetch(`http://localhost:3000/api/item/${id}`, {
+    await fetch(`/api/item/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
