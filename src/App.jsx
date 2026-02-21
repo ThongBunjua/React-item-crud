@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { UserProvider } from "./contexts/UserProvider"; 
-import RequireAuth from "./middleware/RequireAuth";     
+import { UserProvider } from "./contexts/UserProvider";
+import RequireAuth from "./middleware/RequireAuth";
 
 import ItemList from "./components/ItemList";
 import ItemEdit from "./components/ItemEdit";
 import UserList from "./components/UserList";
 import UserEdit from "./components/UserEdit";
 
-import Login from "./components/Login";
-import Profile from "./components/Profile";
+import Login from "./components/login";
+import Profile from "./components/profile";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
 
           <Routes>
             <Route path="/login" element={<Login />} />
-            
+
             <Route path="/profile" element={
               <RequireAuth>
                 <Profile />
